@@ -74,3 +74,6 @@ end
 group :production do
   gem 'pg'
 end
+
+  gem 'devise'
+  gem 'sassc', '~> 2.0'
