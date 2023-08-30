@@ -3504,6 +3504,12 @@ textarea.form-control-lg {
   --bs-dropdown-header-color: #adb5bd;
 }
 
+.nav-item {
+  list-style:none;
+  margin:0 10px;
+  font-size: 15px;
+}
+
 .btn-group,
 .btn-group-vertical {
   position: relative;
