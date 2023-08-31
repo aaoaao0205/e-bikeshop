@@ -80,3 +80,5 @@ end
 
   gem 'devise'
   gem 'sassc', '~> 2.0'
+  gem 'mini_magick'
+  gem 'image_processing', '~> 1.2'
