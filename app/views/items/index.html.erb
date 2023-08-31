@@ -17,48 +17,51 @@
     </head>
     <body>
         <!-- Navigation-->
-        <nav class="navbar navbar-expand-lg navbar-light bg-light">
-            <div class="container px-4 px-lg-5">
-                <a class="navbar-brand" href="#!">Start Bootstrap</a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
-                <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    <ul class="navbar-nav me-auto mb-2 mb-lg-0 ms-lg-4">
-                        <li class="nav-item"><a class="nav-link active" aria-current="page" href="#!">Home</a></li>
-                        <li class="nav-item"><a class="nav-link" href="#!">About</a></li>
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Shop</a>
-                            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                <li><a class="dropdown-item" href="#!">All Products</a></li>
-                                <li><hr class="dropdown-divider" /></li>
-                                <li><a class="dropdown-item" href="#!">Popular Items</a></li>
-                                <li><a class="dropdown-item" href="#!">New Arrivals</a></li>
-                            </ul>
-                        </li>
+     <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <div class="container px-4 px-lg-5">
+        <a class="navbar-brand" href="#!">Start Bootstrap</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0 ms-lg-4">
+                <li class="nav-item"><a class="nav-link active" aria-current="page" href="#!">Home</a></li>
+                <li class="nav-item"><a class="nav-link" href="#!">About</a></li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Shop</a>
+                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <li><a class="dropdown-item" href="#!">All Products</a></li>
+                        <li><hr class="dropdown-divider" /></li>
+                        <li><a class="dropdown-item" href="#!">Popular Items</a></li>
+                        <li><a class="dropdown-item" href="#!">New Arrivals</a></li>
                     </ul>
-                    <ul class="navbar-nav">
-                        <li class="nav-item">
-                            <% if user_signed_in? %>
-                                <%= link_to "#{current_user.first_name} #{current_user.last_name}", "#", class: "nav-link user-nickname" %>
-                            <% else %>
-                                <%= link_to 'ログイン', new_user_session_path, class: "nav-link login" %>
-                            <% end %>
-                        </li>
-                        <li class="nav-item">
-                            <% if user_signed_in? %>
-                                <%= link_to 'ログアウト', destroy_user_session_path, data: { turbo_method: :delete }, class: "nav-link logout" %>
-                            <% end %>
-                        </li>
-                     </ul>
-                        <form class="d-flex">
-                        <button class="btn btn-outline-dark" type="submit">
-                            <i class="bi-cart-fill me-1"></i>
-                            Cart
-                            <span class="badge bg-dark text-white ms-1 rounded-pill">0</span>
-                        </button>
-                    </form>
-                </div>
-            </div>
-        </nav>
+                    <% if user_signed_in? %>
+                        <% if current_user.admin? %>
+                            <li class="nav-item"><%= link_to '商品登録', new_item_path, data: { turbo: false }, class: "nav-link itemregistration" %></li>
+                        <% end %>
+                    <% end %>
+                </li>
+            </ul>
+            <ul class="navbar-nav">
+                <% if user_signed_in? %>
+                    <% if current_user.admin? %>
+                        <li class="nav-item"><%= link_to 'ログアウト', destroy_user_session_path, data: { turbo_method: :delete }, class: "nav-link logout" %></li>
+                    <% else %>
+                        <li class="nav-item"><%= link_to "#{current_user.first_name} #{current_user.last_name}", "#", class: "nav-link user-nickname" %></li>
+                        <li class="nav-item"><%= link_to 'ログアウト', destroy_user_session_path, data: { turbo_method: :delete }, class: "nav-link logout" %></li>
+                    <% end %>
+                <% else %>
+                    <li class="nav-item"><%= link_to 'ログイン', new_user_session_path, class: "nav-link login" %></li>
+                <% end %>
+            </ul>
+            <form class="d-flex">
+                <button class="btn btn-outline-dark" type="submit">
+                    <i class="bi-cart-fill me-1"></i>
+                    Cart
+                    <span class="badge bg-dark text-white ms-1 rounded-pill">0</span>
+                </button>
+            </form>
+        </div>
+    </div>
+</nav>
 
         <!-- Header-->
         <header class="bg-dark py-5" style="background-image: url('<%= asset_path('pexels-photo-369264.jpeg') %>'); background-size: cover; background-position: center;">      
