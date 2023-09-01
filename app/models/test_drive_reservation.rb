@@ -1,0 +1,2 @@
+class TestDriveReservation < ApplicationRecord
+end
