@@ -21,7 +21,7 @@
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav me-auto mb-2 mb-lg-0 ms-lg-4">
-                        <li class="nav-item"><a class="nav-link active" aria-current="page" href="#!">Home</a></li>
+                     <li class="nav-item"><%= link_to "Home", root_path, class: "nav-link active", aria: { current: "page" } %></li>
                         <li class="nav-item"><a class="nav-link" href="#!">About</a></li>
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Shop</a>
@@ -44,18 +44,19 @@
             </div>
         </nav>
         <!-- Product section-->
-       <section class="py-5">
+      <section class="py-5">
         <div class="container px-4 px-lg-5 my-5">
-          <div class="row gx-4 gx-lg-5 align-items-center">
+            <div class="row gx-4 gx-lg-5 align-items-center">
             <div class="col-md-6"><%= image_tag @item.image, class: "item-box-img" %></div>
             <div class="col-md-6">
                 <div class="small mb-1">SKU: BST-498</div>
                 <h1 class="display-5 fw-bolder"><%= @item.item_name %></h1>
                 <div class="fs-5 mb-5"><%= number_to_currency(@item.price, unit: '¥', precision: 0) %></div>
                 <p class="lead"><%= @item.description %></p>
-                  <% if user_signed_in? %>
-                    <% if current_user.id == @item.user_id %>
-                      <button class="btn btn-outline-dark flex-shrink-0" type="button">
+                <% if user_signed_in? %>
+                <% if current_user.id == @item.user_id %>
+                    <div class="d-flex">
+                    <button class="btn btn-outline-dark flex-shrink-0" type="button">
                         <i class="bi-pencil me-1"></i>
                         <%= link_to "Edit", edit_item_path(@item) %>
                     </button>
@@ -63,22 +64,22 @@
                         <i class="bi-trash me-1"></i>
                         <%= link_to "Delete", item_path(@item), method: :delete, data: { confirm: "Are you sure?" } %>
                     </button>
-                    <% else %>
-                    <% unless @item.order.present? %>
-                        <button class="btn btn-outline-dark flex-shrink-0" type="button">
-                        <i class="bi-cart-fill me-1"></i>
-                        <%= link_to "Add to cart", item_orders_path(@item), data: { turbo: false } %>
-                       <div class="d-flex">
-                       <input class="form-control text-center me-3" id="inputQuantity" type="number" value="1" style="max-width: 3rem" />
-                        </button>
-                    <% end %>
-                    <% end %>
+                    </div>
+                <#% else %>
+                    <#div class="d-flex">
+                    <#button class="btn btn-outline-dark flex-shrink-0" type="button">
+                        <#i class="bi-cart-fill me-1"></i>
+                        <#%= link_to "Add to cart", item_order_path(@item), data: { turbo: false } %>
+                    <#/button>
+                    <#input class="form-control text-center me-3" id="inputQuantity" type="number" value="1" style="max-width: 3rem" />
+                    <#/div>
                 <% end %>
-                </div>
+                <% end %>
             </div>
             </div>
         </div>
         </section>
+
 
         <!-- Related items section-->
         <section class="py-5 bg-light">

@@ -8,7 +8,7 @@ class ItemsController < ApplicationController
     if current_user.admin?
       @items = Item.new
     else
-      redirect_to root_path, alert: "商品出品は管理者のみが許可されています。"
+      redirect_to root_path
     end
   end
 
@@ -16,12 +16,12 @@ class ItemsController < ApplicationController
     if current_user.admin?
       @item = Item.new(item_params)
       if @item.save
-        redirect_to items_path, notice: "商品を出品しました。"
+        redirect_to items_path
       else
         render :new
       end
     else
-      redirect_to root_path, alert: "商品出品は管理者のみが許可されています。"
+      redirect_to root_path
     end
   end
 
@@ -29,6 +29,14 @@ class ItemsController < ApplicationController
     @item = Item.find(params[:id])
   end  
 
+  def edit
+    @item = Item.find(params[:id])
+    if current_user.admin?
+    else
+      redirect_to root_path
+    end
+  end
+  
   private
   def item_params
     params.require(:item).permit(:image, :item_name, :description, :price).merge(user_id: current_user.id)
