@@ -6,7 +6,7 @@ class ItemsController < ApplicationController
 
   def new
     if current_user.admin?
-      @items = Item.new
+      @item = Item.new
     else
       redirect_to root_path
     end
