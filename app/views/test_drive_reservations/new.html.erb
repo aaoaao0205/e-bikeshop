@@ -85,7 +85,22 @@
     </section>
     
     <script>
-        // itemモデルからデータを取得し、希望商品の選択肢を動的に追加するJavaScriptコードをここに追加
+        function generateTimeOptions() {
+        var select = document.getElementById('time');
+
+        var startTime = 10 * 60;
+        var endTime = 18 * 60 + 30;
+
+        for (var i = startTime; i <= endTime; i += 30) {
+            var hours = Math.floor(i / 60);
+            var minutes = i % 60;
+            var timeText = (hours < 10 ? '0' : '') + hours + ':' + (minutes === 0 ? '00' : minutes);
+            var option = new Option(timeText, timeText);
+            select.appendChild(option);
+        }
+    }
+
+    window.addEventListener('DOMContentLoaded', generateTimeOptions);
     </script>
 </body>
 </html>
