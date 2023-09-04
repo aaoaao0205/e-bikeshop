@@ -33,6 +33,7 @@
                         <li><a class="dropdown-item" href="#!">Popular Items</a></li>
                         <li><a class="dropdown-item" href="#!">New Arrivals</a></li>
                     </ul>
+                    
                     <% if user_signed_in? %>
                         <% if current_user.admin? %>
                             <li class="nav-item"><%= link_to '商品登録', new_item_path, data: { turbo: false }, class: "nav-link itemregistration" %></li>
@@ -98,7 +99,7 @@
                                     <a class="btn btn-outline-dark mt-auto" href="#">Add to cart</a>
                                 </div>
                                 <div class="text-center">
-                                    <a class="btn btn-outline-dark mt-auto" href="#">Test Ride</a>
+                                <%= link_to "Test Ride", new_test_drive_reservation_path(item_id: item.id), class: "btn btn-outline-dark btn-primary mt-auto" %>
                                 </div>
                             </div> 
                         </div>
