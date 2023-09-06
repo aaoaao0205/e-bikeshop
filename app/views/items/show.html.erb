@@ -51,7 +51,6 @@
                     <%= image_tag @item.image, class: "item-box-img", style: "max-width: 600px; max-height: 700px;" %>
                 </div>
             <div class="col-md-6">
-                <div class="small mb-1">SKU: BST-498</div>
                 <h1 class="display-5 fw-bolder"><%= @item.item_name %></h1>
                 <div class="fs-5 mb-5"><%= number_to_currency(@item.price, unit: '¥', precision: 0) %></div>
                 <p class="lead"><%= @item.description %></p>
