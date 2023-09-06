@@ -18,12 +18,11 @@
         <!-- Navigation-->
         <nav class="navbar navbar-expand-lg navbar-light bg-light">
             <div class="container px-4 px-lg-5">
-                <a class="navbar-brand" href="#!">Start Bootstrap</a>
+                <a class="navbar-brand" href="#!">E-BIKE SHOP</a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav me-auto mb-2 mb-lg-0 ms-lg-4">
                      <li class="nav-item"><%= link_to "Home", root_path, class: "nav-link active", aria: { current: "page" } %></li>
-                        <li class="nav-item"><a class="nav-link" href="#!">About</a></li>
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Shop</a>
                             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
@@ -57,6 +56,7 @@
                           <div class="col-md-6">
                               <div class="mb-3">
                                   <label for="name" class="form-label">名前:</label>
+                                     <span class="badge bg-danger text-white" style="font-size: 10px;">必須</span>
                                   <input type="text" class="form-control" id="name" name="name" required>
                               </div>
                           </div>
@@ -66,6 +66,7 @@
                           <div class="col-md-6">
                               <div class="mb-3">
                                   <label for="email" class="form-label">メールアドレス:</label>
+                                     <span class="badge bg-danger text-white" style="font-size: 10px;">必須</span>
                                   <input type="email" class="form-control" id="email" name="email" required>
                               </div>
                           </div>
@@ -82,10 +83,12 @@
                         </div>
                         <div class="mb-3"> 
                             <label for="date">希望日付:</label>
+                              <span class="badge bg-danger text-white" style="font-size: 10px;">必須</span>
                             <input type="date" id="date" name="date" required>
                         </div>
                         <div class="mb-3"> 
                             <label for="time">希望時間:</label>
+                              <span class="badge bg-danger text-white" style="font-size: 10px;">必須</span>
                             <select id="time" name="time" required>
                             </select>
                         </div>
