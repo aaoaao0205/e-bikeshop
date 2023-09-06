@@ -55,3 +55,18 @@
 - belongs_to :user
 - belongs_to :item
 
+## test_drive_reservations テーブル
+| Column             | Type   | Options     |
+| ------------------ | ------ | ----------- |
+| name               | string | null: false |
+| email              | string | null: false,unique: true|
+| phone              | string | null: false |
+| desired_product    | string | null: false |
+| desired_date       | string | null: false |
+| desired_time       | string | null: false |
+| item_id            | bigint | null: false, foreign_key: true |
+
+### Association
+
+- belongs_to :item
+- has_many :test_drive_reservations
