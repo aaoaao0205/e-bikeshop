@@ -1,22 +1,26 @@
 <!DOCTYPE html>
 <html lang="ja">
-    <head>
-        <meta charset="utf-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-        <meta name="description" content="" />
-        <meta name="author" content="" />
-        <title>Shop Item - Start Bootstrap Template</title>
-        <!-- Favicon-->
-        <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
-        <!-- Bootstrap icons-->
-        <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" rel="stylesheet" />
-        <!-- Core theme CSS (includes Bootstrap)-->
-        <link href="css/styles.css" rel="stylesheet" />
-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.5.2/dist/css/bootstrap.min.css">
-        <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-        <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-    </head>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>Shop Item - Start Bootstrap Template</title>
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="assets/favicon.ico">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.5.2/dist/css/bootstrap.min.css">
+    <!-- Bootstrap icons -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" rel="stylesheet">
+    <!-- Core theme CSS (includes Bootstrap) -->
+    <link href="css/styles.css" rel="stylesheet">
+    <!-- jQuery UI CSS -->
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
+    <!-- jQuery and jQuery UI JavaScript -->
+    <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+    <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
+</head>
+
     <body>
         <!-- Navigation-->
      <nav class="navbar navbar-expand-lg navbar-light bg-light">
@@ -47,103 +51,88 @@
     </div>
 </nav>
 
-<section class="py-5">
-  <div class="container px-4 px-lg-5 my-5">
-    <div class="row gx-4 gx-lg-5 justify-content-center">
-      <div class="col-lg-6" style="background-color: #f0f0f0; padding: 20px;">
-        <h2>予約フォーム</h2>
+<div class="reservation-form-wrapper bg-light p-4">
+  <section class="py-5">
+    <div class="container px-4 px-lg-5 my-5" style="max-width: 900px;">
+      <div class="row gx-4 gx-lg-5 justify-content-center">
+        <div class="col-lg-6" style="background-color: #f0f0f0; padding: 20px;">
+        <h2>新規予約</h2>
         <%= form_with(model: @test_drive_reservation, local: true) do |f| %>
-          <!-- 1. 名前とメールアドレス -->
-          <div class="row">
-            <div class="col-md-6">
-              <div class="mb-3">
-                <%= f.label :name, '名前:', class: 'form-label' %>
-                <span class="badge bg-danger text-white" style="font-size: 10px;">必須</span>
-                <%= f.text_field :name, class: 'form-control', id: 'name', required: true %>
-              </div>
-            </div>
-            <div class="col-md-6">
-              <div class="mb-3">
-                <%= f.label :email, 'メールアドレス:', class: 'form-label' %>
-                <span class="badge bg-danger text-white" style="font-size: 10px;">必須</span>
-                <%= f.email_field :email, class: 'form-control', id: 'email', required: true %>
-              </div>
-            </div>
-          </div> <!-- 1. 名前とメールアドレス -->
 
-          <!-- 2. 希望商品 -->
+          <div class="mb-3">
+            <%= f.label :name, '名前:', class: 'form-label' %>
+            <span class="badge bg-danger text-white" style="font-size: 10px;">必須</span>
+            <%= f.text_field :name, class: 'form-control', id: 'name', required: true %>
+          </div>
+
+          <div class="mb-3">
+            <%= f.label :email,'メールアドレス:', class: 'form-label' %>
+            <span class="badge bg-danger text-white" style="font-size: 10px;">必須</span>
+            <%= f.email_field :email, class: 'form-control', id: 'email', required: true %>
+          </div> 
+
+          <div class="mb-3">
+            <%= f.label :phone, '電話番号:', class: 'form-label' %>
+            <span class="badge bg-danger text-white" style="font-size: 10px;">必須</span>
+            <%= f.text_field :phone, class: 'form-control', id: 'phone', required: true %>
+          </div>
+
           <div class="mb-3">
             <%= f.label :desired_product, '希望商品:' %>
-            <select id="desired_product" name="desired_product" class="form-control">
-              <option value="" disabled selected>選択してください</option>
-              <% @items.each do |item| %>
-                <option value="<%= item.id %>"><%= item.item_name %></option>
-              <% end %>
-            </select>
-          </div> <!-- 2. 希望商品 -->
-
-          <!-- 3. 希望日付 -->
-          <div class="mb-3">
-            <label for="date">希望日付:</label>
             <span class="badge bg-danger text-white" style="font-size: 10px;">必須</span>
-            <input type="text" id="date" name="date" required>
-          </div> 
-          <!-- 3. 希望日付 -->
+            <%= f.select :desired_product, options_for_select(@items.map { |item| [item.item_name, item.id] }, prompt: '選択してください'), {}, class: 'form-control' %>
+          </div>
 
-          <!-- 4. 希望時間 -->
           <div class="mb-3">
-            <label for="time">希望時間:</label>
+            <%= label_tag :desired_date, '希望日付:' %>
             <span class="badge bg-danger text-white" style="font-size: 10px;">必須</span>
-            <select id="time" name="time" required>
-              <!-- 希望時間のオプションを生成するJavaScriptがここに入ります -->
-            </select>
+            <%= f.text_field :desired_date, id: 'date', class: 'form-control', required: true %>
           </div> 
-          <!-- 4. 希望時間 -->
 
-          <!-- 5. 送信ボタン -->
           <div class="mb-3">
-            <button type="submit" class="btn btn-primary">予約する</button>
+            <%= label_tag :desired_time, '希望時間:' %>
+            <span class="badge bg-danger text-white" style="font-size: 10px;">必須</span>
+            <select name="desired_time" id="desired_time" class="form-control" required="true">
+              <option value="">選択してください</option>
+            </select>
+          </div>
+
+          <div class="mb-3">
+            <%= f.submit '予約する', class: 'btn btn-primary' %>
           </div> 
-          <!-- 5. 送信ボタン -->
         <% end %>
       </div>
     </div>
   </div>
-</section>
+</div>
 
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  // 希望時間の選択肢を生成
+  generateTimeOptions();
 
-    
-    <script>
-        function generateTimeOptions() {
-        var select = document.getElementById('time');
-
-        var startTime = 10 * 60;
-        var endTime = 18 * 60 + 30;
-
-        for (var i = startTime; i <= endTime; i += 30) {
-            var hours = Math.floor(i / 60);
-            var minutes = i % 60;
-            var timeText = (hours < 10 ? '0' : '') + hours + ':' + (minutes === 0 ? '00' : minutes);
-            var option = new Option(timeText, timeText);
-            select.appendChild(option);
-        }
-    }
-
-    window.addEventListener('DOMContentLoaded', generateTimeOptions);
-
-$(function() {
-    $("#date").datepicker({
-        minDate: 1, 
-        dateFormat: 'yy-mm-dd' 
-    });
+  // 日付ピッカーの設定
+  $("#date").datepicker({
+    minDate: 1, 
+    dateFormat: 'yy-mm-dd' 
+  });
 });
 
+// 希望時間の選択肢を生成する関数
+function generateTimeOptions() {
+  const select = document.getElementById('desired_time');
+  const startTime = 10 * 60; 
+  const endTime = 18 * 60 + 30; 
 
-    </script>
+  for (let i = startTime; i <= endTime; i += 30) {
+    const hours = Math.floor(i / 60);
+    const minutes = i % 60;
+    const timeText = (hours < 10 ? '0' : '') + hours + ':' + (minutes === 0 ? '00' : minutes);
+    const option = new Option(timeText, timeText);
+    select.appendChild(option);
+  }
+}
+</script>
 </body>
 </html>
-
-
-
-
 
