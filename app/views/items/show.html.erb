@@ -1,10 +1,11 @@
-<!DOCTYPE html>
 <html lang="ja">
     <head>
-        <meta charset="utf-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-        <meta name="description" content="" />
-        <meta name="author" content="" />
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <meta name="description" content="">
+        <meta name="author" content="">
+        <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+        <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
         <title>E-BIKE SHOP</title>
         <!-- Favicon-->
         <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
@@ -14,34 +15,49 @@
         <link href="css/styles.css" rel="stylesheet" />
     </head>
     <body>
-        <!-- Navigation-->
+        <!-- Navigation -->
         <nav class="navbar navbar-expand-lg navbar-light bg-light">
-            <div class="container px-4 px-lg-5">
-                <a class="navbar-brand" href="#!">E-BIKE SHOP</a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
-                <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    <ul class="navbar-nav me-auto mb-2 mb-lg-0 ms-lg-4">
-                     <li class="nav-item"><%= link_to "Home", root_path, class: "nav-link active", aria: { current: "page" } %></li>
-                        <li class="nav-item"><%= link_to "Test Ride", new_test_drive_reservation_path, class: "nav-link" %></li>
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Shop</a>
-                            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                <li><a class="dropdown-item" href="#!">All Products</a></li>
-                                <li><hr class="dropdown-divider" /></li>
-                                <li><a class="dropdown-item" href="#!">Popular Items</a></li>
-                                <li><a class="dropdown-item" href="#!">New Arrivals</a></li>
-                            </ul>
-                        </li>
-                    </ul>
-                    <form class="d-flex">
-                        <button class="btn btn-outline-dark" type="submit">
-                            <i class="bi-cart-fill me-1"></i>
-                            Cart
-                            <span class="badge bg-dark text-white ms-1 rounded-pill">0</span>
-                        </button>
-                    </form>
-                </div>
+        <div class="container px-4 px-lg-5">
+            <a class="navbar-brand">E-BIKE SHOP</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0 ms-lg-4">
+                <li class="nav-item"><%= link_to "Home", root_path, class: "nav-link active" %></li>
+                <li class="nav-item"><%= link_to "Test Ride", new_test_drive_reservation_path, class: "nav-link" %></li>
+                <li class="nav-item dropdown">
+                <a class="nav-link" id="navbarDropdown" href="#">Shop</a>
+                <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <li><a class="dropdown-item" href="#!">All Products</a></li>
+                    <li><hr class="dropdown-divider"></li>
+                    <li><a class="dropdown-item" href="#!">Popular Items</a></li>
+                    <li><a class="dropdown-item" href="#!">New Arrivals</a></li>
+                </ul>
+                </li>
+            </ul>
             </div>
+            <ul class="navbar-nav">
+            <% if user_signed_in? %>
+                <% if current_user.admin? %>
+                <li class="nav-item"><%= link_to '商品登録', new_item_path, data: { turbo: false }, class: "nav-link itemregistration" %></li>
+                <li class="nav-item"><%= link_to 'ログアウト', destroy_user_session_path, data: { turbo_method: :delete }, class: "nav-link logout" %></li>
+                <% else %>
+                <li class="nav-item"><%= link_to "#{current_user.first_name} #{current_user.last_name}", "#", class: "nav-link user-nickname" %></li>
+                <li class="nav-item"><%= link_to 'ログアウト', destroy_user_session_path, data: { turbo_method: :delete }, class: "nav-link logout" %></li>
+                <% end %>
+            <% else %>
+                <li class="nav-item"><%= link_to 'ログイン', new_user_session_path, class: "nav-link login" %></li>
+            <% end %>
+            </ul>
+            <form class="d-flex">
+            <button class="btn btn-outline-dark" type="submit">
+                <i class="bi-cart-fill me-1"></i>
+                Cart
+                <span class="badge bg-dark text-white ms-1 rounded-pill">0</span>
+            </button>
+            </form>
+        </div>
         </nav>
         <!-- Product section-->
         <section class="py-5">
@@ -66,7 +82,8 @@
                         <%= link_to "Delete", item_path(@item), method: :delete, data: { confirm: "Are you sure?" } %>
                     </button>
                     </div>
-                <#% else %>
+                    <!--
+                <% else %>
                     <#div class="d-flex">
                     <#button class="btn btn-outline-dark flex-shrink-0" type="button">
                         <#i class="bi-cart-fill me-1"></i>
@@ -75,6 +92,7 @@
                     <#input class="form-control text-center me-3" id="inputQuantity" type="number" value="1" style="max-width: 3rem" />
                     <#/div>
                 <% end %>
+                -->
                 <% end %>
             </div>
             </div>
@@ -190,7 +208,7 @@
         </section>
         <!-- Footer-->
         <footer class="py-5 bg-dark">
-            <div class="container"><p class="m-0 text-center text-white">Copyright &copy; Your Website 2023</p></div>
+            <div class="container"><p class="m-0 text-center text-white">Copyright &copy; E-BIKE SHOP 2023</p></div>
         </footer>
         <!-- Bootstrap core JS-->
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>

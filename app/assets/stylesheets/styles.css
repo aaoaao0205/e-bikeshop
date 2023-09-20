@@ -3504,12 +3504,6 @@ textarea.form-control-lg {
   --bs-dropdown-header-color: #adb5bd;
 }
 
-.nav-item {
-  list-style:none;
-  margin:0 10px;
-  font-size: 15px;
-}
-
 .btn-group,
 .btn-group-vertical {
   position: relative;
@@ -10830,3 +10824,30 @@ textarea.form-control-lg {
     display: none !important;
   }
 }
+
+.custom-bg {
+  background-image: url('DSC09801.jpg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.custom-btn {
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
+  border-radius: 12px;
+}
+
+.custom-btn:hover {
+  background-color: #0056b3;
+  color: white;
+}
+

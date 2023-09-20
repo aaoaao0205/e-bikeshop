@@ -4,7 +4,7 @@ FactoryBot.define do
     email { "MyString" }
     phone { "MyString" }
     desired_product { "MyString" }
-    desired_date { "2023-09-02" }
+    desired_date { "2023-09-20" }
     desired_time { "MyString" }
   end
 end
